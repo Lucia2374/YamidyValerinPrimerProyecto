@@ -5,13 +5,13 @@ const Home = ()=>{
     return (
         <View style={[styles.contenedor]}>
             <Text style={[styles.titulo]}>Bienvenido a My App</Text>
-            <Text style={[styles.subtitulo]}>Elige una opción</Text>
+            <Text style={[styles.subtitulo]}>Menú de navegación</Text>
 
-            <Link href="/fibonacci" style={[styles.opcion]}>Serie de Fibonacci</Link>
-            <Link href="/factorial" style={[styles.opcion]}>Factorial</Link>
-            <Link href="/tablas" style={[styles.opcion]}>Tablas de multiplicar</Link>
-            <Link href="/notas" style={[styles.opcion]}>Calculadora de notas</Link>
-            <Link href="/datos" style={[styles.opcion]}>Datos básicos</Link>
+            <Link href="/fibonacci" style={[styles.opcion]}>1. Serie de Fibonacci</Link>
+            <Link href="/factorial" style={[styles.opcion]}>2. Factorial</Link>
+            <Link href="/tablas" style={[styles.opcion]}>3. Tablas del 1 al 10</Link>
+            <Link href="/notas" style={[styles.opcion]}>4. Calculadora de notas</Link>
+            <Link href="/datos" style={[styles.opcion]}>5. Datos de una persona</Link>
         </View>
     );
 }

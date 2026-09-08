@@ -21,7 +21,8 @@ export default function RootLayout() {
         <Stack.Screen name="factorial" options={{ title: 'Factorial' }} />
         <Stack.Screen name="tablas" options={{ title: 'Tablas de multiplicar' }} />
         <Stack.Screen name="notas" options={{ title: 'Calculadora de notas' }} />
-        <Stack.Screen name="datos" options={{ title: 'Datos básicos' }} />
+        <Stack.Screen name="promedio" options={{ title: 'Promedio' }} />
+        <Stack.Screen name="datos" options={{ title: 'Datos de una persona' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
