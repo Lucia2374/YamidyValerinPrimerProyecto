@@ -17,6 +17,11 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
+        <Stack.Screen name="fibonacci" options={{ title: 'Fibonacci' }} />
+        <Stack.Screen name="factorial" options={{ title: 'Factorial' }} />
+        <Stack.Screen name="tablas" options={{ title: 'Tablas de multiplicar' }} />
+        <Stack.Screen name="notas" options={{ title: 'Calculadora de notas' }} />
+        <Stack.Screen name="datos" options={{ title: 'Datos básicos' }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>

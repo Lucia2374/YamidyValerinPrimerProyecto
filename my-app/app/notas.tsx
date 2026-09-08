@@ -1,10 +1,10 @@
 import { View, Text, StyleSheet } from "react-native"
 
-const Explorar = ()=>{
+const CalculadoraNotas = ()=>{
     return (
         <View style={[styles.contenedor]}>
-            <Text style={[styles.titulo]}>Explorar</Text>
-            <Text>Pantalla de exploración</Text>
+            <Text style={[styles.titulo]}>Calculadora de notas</Text>
+            <Text style={[styles.subtitulo]}>Próximamente</Text>
         </View>
     );
 }
@@ -17,9 +17,12 @@ const styles = StyleSheet.create({
     },
     titulo:{
         fontSize:20,
-        fontWeight:"bold",
-        marginBottom:8
+        fontWeight:"bold"
+    },
+    subtitulo:{
+        fontSize:14,
+        marginTop:8
     }
 })
 
-export default Explorar
+export default CalculadoraNotas
