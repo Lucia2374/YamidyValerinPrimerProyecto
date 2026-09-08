@@ -27,6 +27,15 @@ export const Colors = {
   },
 };
 
+export const MenuColors = {
+  fondo: '#F2E8D5',
+  tarjeta: '#F7F0E3',
+  boton: '#8B5E3C',
+  botonTexto: '#FFFFFF',
+  titulo: '#4A3728',
+  subtitulo: '#7A6A57',
+} as const;
+
 export const Fonts = Platform.select({
   ios: {
     /** iOS `UIFontDescriptorSystemDesignDefault` */

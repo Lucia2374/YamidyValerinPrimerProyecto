@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { View, Text, TextInput, Pressable, StyleSheet, ScrollView } from "react-native"
+import { MenuOpciones } from "@/components/menu-opciones"
+import { MenuColors } from "@/constants/theme"
 
 const datosIniciales = {
     nombre: "Yamidy Valerín",
@@ -33,7 +35,9 @@ const DatosPersona = ()=>{
 
     if (editando) {
         return (
-            <ScrollView contentContainerStyle={[styles.contenedor]}>
+            <View style={[styles.pantalla]}>
+                <MenuOpciones />
+                <ScrollView contentContainerStyle={[styles.contenedor]}>
                 <Text style={[styles.titulo]}>Editar datos</Text>
 
                 <Text style={[styles.etiqueta]}>Nombre</Text>
@@ -85,12 +89,15 @@ const DatosPersona = ()=>{
                 <Pressable style={[styles.boton]} onPress={guardar}>
                     <Text style={[styles.textoBoton]}>Guardar</Text>
                 </Pressable>
-            </ScrollView>
+                </ScrollView>
+            </View>
         );
     }
 
     return (
-        <ScrollView contentContainerStyle={[styles.contenedor]}>
+        <View style={[styles.pantalla]}>
+            <MenuOpciones />
+            <ScrollView contentContainerStyle={[styles.contenedor]}>
             <Text style={[styles.titulo]}>Datos de la persona</Text>
 
             <View style={[styles.fila]}>
@@ -125,11 +132,16 @@ const DatosPersona = ()=>{
             <Pressable style={[styles.boton]} onPress={empezarEdicion}>
                 <Text style={[styles.textoBoton]}>Cambiar</Text>
             </Pressable>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    pantalla:{
+        flex:1,
+        backgroundColor:MenuColors.fondo
+    },
     contenedor:{
         flexGrow:1,
         justifyContent:"center",
@@ -161,7 +173,7 @@ const styles = StyleSheet.create({
         marginBottom:12
     },
     boton:{
-        backgroundColor:"#0a7ea4",
+        backgroundColor:MenuColors.boton,
         paddingVertical:12,
         paddingHorizontal:24,
         borderRadius:8,

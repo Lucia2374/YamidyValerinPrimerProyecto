@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native"
 import { Link } from "expo-router"
+import { Fonts, MenuColors } from "@/constants/theme"
 
 const Home = ()=>{
     return (
@@ -21,28 +22,36 @@ const styles = StyleSheet.create({
         flex:1,
         alignItems:"center",
         justifyContent:"center",
-        padding:20
+        padding:24,
+        backgroundColor:MenuColors.fondo
     },
     titulo:{
-        fontSize:20,
-        fontWeight:"bold"
+        fontSize:26,
+        fontFamily:Fonts.serif,
+        color:MenuColors.titulo
     },
     subtitulo:{
         fontSize:14,
         marginTop:8,
-        marginBottom:24
+        marginBottom:28,
+        color:MenuColors.subtitulo
     },
     opcion:{
         fontSize:16,
-        color:"#fff",
-        backgroundColor:"#0a7ea4",
-        paddingVertical:12,
+        color:MenuColors.botonTexto,
+        backgroundColor:MenuColors.boton,
+        paddingVertical:14,
         paddingHorizontal:24,
-        borderRadius:8,
-        marginBottom:12,
+        borderRadius:12,
+        marginBottom:14,
         width:"100%",
         textAlign:"center",
-        overflow:"hidden"
+        overflow:"hidden",
+        shadowColor:"#000",
+        shadowOffset:{ width:0, height:2 },
+        shadowOpacity:0.15,
+        shadowRadius:4,
+        elevation:3
     }
 })
 

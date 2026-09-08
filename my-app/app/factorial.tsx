@@ -1,16 +1,30 @@
 import { useState } from "react"
-import { Text, TextInput, Pressable, StyleSheet, ScrollView } from "react-native"
+import { View, Text, TextInput, Pressable, StyleSheet, ScrollView } from "react-native"
+import { MenuOpciones } from "@/components/menu-opciones"
+import { MenuColors } from "@/constants/theme"
 
 const Factorial = ()=>{
     const [numero, setNumero] = useState("")
     const [resultado, setResultado] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null)
+
+    const cambiarNumero = (valor: string)=>{
+        setNumero(valor.replace(/[^0-9]/g, ""))
+    }
 
     const calcular = ()=>{
-        const n = parseInt(numero, 10)
-        if (isNaN(n) || n < 0) {
+        if (numero.trim() === "") {
+            setError("Ingresa un número (sin letras ni negativos)")
             setResultado(null)
             return
         }
+        const n = parseInt(numero, 10)
+        if (isNaN(n) || n < 0) {
+            setError("El número no puede ser negativo")
+            setResultado(null)
+            return
+        }
+        setError(null)
         let factorial = 1
         for (let i = 2; i <= n; i++) {
             factorial = factorial * i
@@ -19,16 +33,20 @@ const Factorial = ()=>{
     }
 
     return (
-        <ScrollView contentContainerStyle={[styles.contenedor]}>
+        <View style={[styles.pantalla]}>
+            <MenuOpciones />
+            <ScrollView contentContainerStyle={[styles.contenedor]}>
             <Text style={[styles.titulo]}>Factorial</Text>
             <Text style={[styles.etiqueta]}>Escribe un número:</Text>
             <TextInput
                 style={[styles.input]}
                 keyboardType="numeric"
                 value={numero}
-                onChangeText={setNumero}
+                onChangeText={cambiarNumero}
                 placeholder="Ej: 5"
             />
+            {error && <Text style={[styles.error]}>{error}</Text>}
+
             <Pressable style={[styles.boton]} onPress={calcular}>
                 <Text style={[styles.textoBoton]}>Calcular</Text>
             </Pressable>
@@ -36,11 +54,16 @@ const Factorial = ()=>{
             {resultado !== null && (
                 <Text style={[styles.resultado]}>{resultado}</Text>
             )}
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    pantalla:{
+        flex:1,
+        backgroundColor:MenuColors.fondo
+    },
     contenedor:{
         flexGrow:1,
         alignItems:"center",
@@ -65,8 +88,14 @@ const styles = StyleSheet.create({
         width:"100%",
         marginBottom:12
     },
+    error:{
+        color:"#c62828",
+        fontSize:13,
+        marginBottom:12,
+        alignSelf:"flex-start"
+    },
     boton:{
-        backgroundColor:"#0a7ea4",
+        backgroundColor:MenuColors.boton,
         paddingVertical:12,
         paddingHorizontal:24,
         borderRadius:8,

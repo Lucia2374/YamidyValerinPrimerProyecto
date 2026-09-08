@@ -1,10 +1,14 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native"
+import { MenuOpciones } from "@/components/menu-opciones"
+import { MenuColors } from "@/constants/theme"
 
 const numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const TablasMultiplicar = ()=>{
     return (
-        <ScrollView contentContainerStyle={[styles.contenedor]}>
+        <View style={[styles.pantalla]}>
+            <MenuOpciones />
+            <ScrollView contentContainerStyle={[styles.contenedor]}>
             <Text style={[styles.titulo]}>Tablas de multiplicar (1 al 10)</Text>
 
             {numeros.map((base)=>(
@@ -17,11 +21,16 @@ const TablasMultiplicar = ()=>{
                     ))}
                 </View>
             ))}
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    pantalla:{
+        flex:1,
+        backgroundColor:MenuColors.fondo
+    },
     contenedor:{
         alignItems:"center",
         padding:20

@@ -1,5 +1,6 @@
 import { Text, Pressable, StyleSheet, ScrollView } from "react-native"
 import { router, useLocalSearchParams } from "expo-router"
+import { MenuColors } from "@/constants/theme"
 
 const Promedio = ()=>{
     const { notas } = useLocalSearchParams<{ notas: string }>()
@@ -40,7 +41,8 @@ const styles = StyleSheet.create({
         flexGrow:1,
         alignItems:"center",
         justifyContent:"center",
-        padding:20
+        padding:20,
+        backgroundColor:MenuColors.fondo
     },
     titulo:{
         fontSize:20,
@@ -73,7 +75,7 @@ const styles = StyleSheet.create({
         marginBottom:24
     },
     boton:{
-        backgroundColor:"#0a7ea4",
+        backgroundColor:MenuColors.boton,
         paddingVertical:12,
         paddingHorizontal:24,
         borderRadius:8,

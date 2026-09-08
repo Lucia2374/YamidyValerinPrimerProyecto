@@ -1,13 +1,35 @@
 import { useState } from "react"
 import { View, Text, TextInput, Pressable, StyleSheet, ScrollView } from "react-native"
 import { router } from "expo-router"
+import { MenuOpciones } from "@/components/menu-opciones"
+import { MenuColors } from "@/constants/theme"
+
+const limpiarNota = (texto: string)=>{
+    let limpio = texto.replace(/[^0-9.]/g, "")
+    const partes = limpio.split(".")
+    if (partes.length > 2) {
+        limpio = partes[0] + "." + partes.slice(1).join("")
+    }
+    return limpio
+}
+
+const validarNota = (valor: string): string | null =>{
+    if (valor.trim() === "") {
+        return null
+    }
+    const numero = parseFloat(valor)
+    if (isNaN(numero) || numero < 0 || numero > 5) {
+        return "La nota debe estar entre 0.0 y 5.0"
+    }
+    return null
+}
 
 const CalculadoraNotas = ()=>{
     const [notas, setNotas] = useState(["", "", ""])
 
     const cambiarNota = (indice: number, valor: string)=>{
         const copia = [...notas]
-        copia[indice] = valor
+        copia[indice] = limpiarNota(valor)
         setNotas(copia)
     }
 
@@ -21,9 +43,15 @@ const CalculadoraNotas = ()=>{
         }
     }
 
+    const hayError = notas.some((nota)=> validarNota(nota) !== null)
+
     const verPromedio = ()=>{
+        if (hayError) {
+            return
+        }
+
         const numeros = notas
-            .map((n)=> parseFloat(n.replace(",", ".")))
+            .map((n)=> parseFloat(n))
             .filter((n)=> !isNaN(n))
 
         if (numeros.length === 0) {
@@ -37,7 +65,9 @@ const CalculadoraNotas = ()=>{
     }
 
     return (
-        <ScrollView contentContainerStyle={[styles.contenedor]}>
+        <View style={[styles.pantalla]}>
+            <MenuOpciones />
+            <ScrollView contentContainerStyle={[styles.contenedor]}>
             <Text style={[styles.titulo]}>Ingresa tus notas</Text>
 
             {notas.map((nota, indice)=>(
@@ -50,6 +80,7 @@ const CalculadoraNotas = ()=>{
                         onChangeText={(valor)=> cambiarNota(indice, valor)}
                         placeholder="0.0 a 5.0"
                     />
+                    {validarNota(nota) && <Text style={[styles.error]}>{validarNota(nota)}</Text>}
                 </View>
             ))}
 
@@ -65,11 +96,16 @@ const CalculadoraNotas = ()=>{
             <Pressable style={[styles.boton]} onPress={verPromedio}>
                 <Text style={[styles.textoBoton]}>Ver promedio</Text>
             </Pressable>
-        </ScrollView>
+            </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
+    pantalla:{
+        flex:1,
+        backgroundColor:MenuColors.fondo
+    },
     contenedor:{
         flexGrow:1,
         justifyContent:"center",
@@ -95,6 +131,11 @@ const styles = StyleSheet.create({
         paddingVertical:10,
         paddingHorizontal:12
     },
+    error:{
+        color:"#c62828",
+        fontSize:13,
+        marginTop:4
+    },
     filaBotones:{
         flexDirection:"row",
         justifyContent:"space-between",
@@ -103,17 +144,17 @@ const styles = StyleSheet.create({
     },
     botonSecundario:{
         borderWidth:1,
-        borderColor:"#0a7ea4",
+        borderColor:MenuColors.boton,
         borderRadius:8,
         paddingVertical:10,
         paddingHorizontal:16
     },
     textoBotonSecundario:{
-        color:"#0a7ea4",
+        color:MenuColors.boton,
         fontSize:14
     },
     boton:{
-        backgroundColor:"#0a7ea4",
+        backgroundColor:MenuColors.boton,
         paddingVertical:12,
         paddingHorizontal:24,
         borderRadius:8,
